@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:instargram_clone_inflearn/tab/home/home_model.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final model = HomeModel();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Instargram Clone'),
@@ -24,20 +27,20 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 80,
                       height: 80,
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2022/06/03/7d17ec30-276f-4265-b056-c3a691a5a8f1.jpg'),
+                            model.getProfileImageUrl()),
                       ),
                     ),
                     const SizedBox(height: 8), //padding
-                    const Text(
-                      'test@test.com,',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      model.getEmail(),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const Text('NANA'),
+                    Text(model.getNickName()),
                     const SizedBox(height: 8),
                     Row(
                       mainAxisSize: MainAxisSize.min,

@@ -1,6 +1,7 @@
 //stateful 위젯을 만들어서 전환
 
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:instargram_clone_inflearn/tab/account/account_page.dart';
 import 'package:instargram_clone_inflearn/tab/home/home_page.dart';
 import 'package:instargram_clone_inflearn/tab/search/search_page.dart';
@@ -19,6 +20,11 @@ class _TabPageState extends State<TabPage> {
     HomePage(),
     SearchPage(),
     AccountPage(),
+    ProfileScreen(
+      providerConfigs: [
+        EmailProviderConfiguration(),
+      ],
+    ),
   ];
 
   @override
@@ -26,6 +32,7 @@ class _TabPageState extends State<TabPage> {
     return Scaffold(
       body : _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type : BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -44,6 +51,10 @@ class _TabPageState extends State<TabPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Account',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Profile',
           ),
         ],
       ),

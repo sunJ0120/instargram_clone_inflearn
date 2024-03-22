@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:instargram_clone_inflearn/tab/account/account_model.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final model = AccountModel();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Instargram Clone'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () { //로그아웃
+              model.logout();
+            },
             icon: const Icon(Icons.exit_to_app),
           ),
         ],
@@ -24,12 +28,12 @@ class AccountPage extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 80,
                       height: 80,
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2022/06/03/7d17ec30-276f-4265-b056-c3a691a5a8f1.jpg'),
+                            model.getProfileImageUrl()),
                       ),
                     ),
                     Container(
@@ -63,9 +67,9 @@ class AccountPage extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                const Text(
-                  'NANA',
-                  style: TextStyle(
+                Text(
+                  model.getNickName(),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

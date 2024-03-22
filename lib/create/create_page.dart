@@ -1,7 +1,18 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class CreatePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:instargram_clone_inflearn/create/creat_model.dart';
+
+class CreatePage extends StatefulWidget {
   const CreatePage({super.key});
+
+  @override
+  State<CreatePage> createState() => _CreatePageState();
+}
+
+class _CreatePageState extends State<CreatePage> {
+  final model = CreateModel();
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +20,10 @@ class CreatePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('새 게시물'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
+          IconButton(
+              onPressed: () {
+              },
+              icon: const Icon(Icons.send)),
         ],
       ),
       body: Padding(
@@ -29,15 +43,22 @@ class CreatePage extends StatelessWidget {
                   fillColor: Colors.white70,
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  _image = await model.getImage();
+                  //화면 갱신 코드
+                  setState(() {});
+                },
                 child: const Text('이미지 선택'),
               ),
-              Image.network(
-                'https://img.hankyung.com/photo/202211/BF.31807042.1.jpg',
-                width: 300,
-              ),
+              if (_image != null)
+                Image.file(
+                  _image!,
+                  width: 300,
+                ),
             ],
           ),
         ),
